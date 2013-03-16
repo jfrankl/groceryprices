@@ -1,6 +1,6 @@
-    <ul>
-    {% for products in product_type %}
-        <li><a href="/product/{{ products.id }}/">{{ products.name }}</a></li>
-    {% endfor %}
-    </ul>
-    Hey
+<h1>What kind of food do you want?</h1>
+<ul>
+{% for products in product_type %}
+    <li><a href="/food/{{ products.name|slugify }}/">{{ products.name }}</a></li>
+{% endfor %}
+</ul>

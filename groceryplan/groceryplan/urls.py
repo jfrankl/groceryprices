@@ -14,6 +14,6 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^$', 'prices.views.index'),  
-    url(r'^product/(?P<product_id>\d+)/$', 'prices.views.product'),
+    url(r'^food/(?P<food_id>(.+))/$', 'prices.views.food'),
     url(r'^admin/', include(admin.site.urls)),
 )

@@ -3,18 +3,21 @@ from django.db import models
 from django import forms
 from django.forms.widgets import CheckboxSelectMultiple
 from collections import defaultdict
+from django.template.defaultfilters import slugify
 
 CONVENTIONAL = 'CON'
 ORGANIC = 'ORG'
 LOW_SPRAY = 'LOW'
 CHEMICAL_FREE = 'CMF'
 
-PRODUCTION_CHOICES = [
+PRODUCTION_CHOICES = (
     (CONVENTIONAL, 'Conventional'),
     (ORGANIC, 'Organic'),
     (LOW_SPRAY, 'Low Spray'),
     (CHEMICAL_FREE, 'Chemical Free')
-]
+)
+
+# Generate dictionary PC from tuple PRODUCTION_CHOICES.
 
 PC = {}
 for v, k in PRODUCTION_CHOICES:
@@ -72,18 +75,20 @@ class Feature(models.Model):
     name = models.CharField(max_length=200)
 
 
-class ProductType(models.Model):
-    name = models.CharField(max_length=200)
-    section = models.CharField(max_length=3,
-                                      choices=SECTION_CHOICES)    
+class Food(models.Model):
+    name = models.CharField(max_length=200, unique=True)
+    slug = models.SlugField(max_length=200, unique=True)
+    section = models.CharField(max_length=3, choices=SECTION_CHOICES)
+
     def __unicode__(self):
 
         return self.name
 
+
 class Product(models.Model):
-    name = models.ForeignKey(ProductType)
+    name = models.ForeignKey(Food, to_field='slug')
     store = models.ForeignKey(Store)        
-    date = models.DateTimeField(auto_now_add=True, blank=True)    
+    date = models.DateTimeField(auto_now_add=True)    
     price = models.DecimalField(decimal_places=2, max_digits=6)    
     amount = models.DecimalField(decimal_places=2, max_digits=6)      
     unit = models.CharField(max_length=3,

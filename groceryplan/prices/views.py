@@ -1,33 +1,27 @@
 from django.template import Context, loader
 from django.http import HttpResponse
-from prices.models import ProductType, Product
-from django.shortcuts import render
+from prices.models import Food, Product
+from django.shortcuts import render, render_to_response
+
 
 
 def index(request):
-    ptype = ProductType.objects.all()
-    p = Product.objects.all()    
-    latest_poll_list = ProductType.objects.all().order_by('-name')[:5]    
-    t = loader.get_template('product/index.html')
+    ptype = Food.objects.all()
 
     context = {
-        'product_type': ptype,
-        'product': p,
-        'latest_poll_list': latest_poll_list     
+        'product_type': ptype
     }   
 
-    return render(request, 'index.html', context)    
+    return render_to_response('index.html', context)    
 
-def product(request, product_id):
-    ptype = ProductType.objects.all()
-    p = Product.objects.all()    
-    latest_poll_list = ProductType.objects.all().order_by('-name')[:5]    
-    t = loader.get_template('product/index.html')
 
+def food(request, food_id):
+    product = Product.objects.filter(name=food_id)
+    header = Food.objects.get(slug=food_id)
     context = {
-        'product_type': ptype,
-        'product': p,
-        'latest_poll_list': latest_poll_list     
+        'product': product,
+        'header': header
+
     }   
 
-    return render(request, 'index.html', context)    
+    return render_to_response('food/index.html', context)    
