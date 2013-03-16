@@ -16,6 +16,10 @@ PRODUCTION_CHOICES = [
     (CHEMICAL_FREE, 'Chemical Free')
 ]
 
+PC = {}
+for v, k in PRODUCTION_CHOICES:
+    PC[v] = k
+
 CANNED = 'CAN'
 FROZEN = 'FRO'
 PRODUCE = 'PRO'
@@ -94,3 +98,6 @@ class Product(models.Model):
             return self.value * UNIT_CONVERSIONS[(self.unit, intendedUnit)]
         else:
             raise Exception( "Can't convert" )
+
+    def __unicode__(self):
+        return "%s %s at %s" % (PC[self.production], self.name.name, self.store.name)
