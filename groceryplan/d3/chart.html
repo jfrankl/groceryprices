@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Basic D3 Chart</title>
+		<script src="http://d3js.org/d3.v3.min.js"></script>
+		<style type="text/css">
+		</style>		
+    </head>
+    <body>
+		<h1>Basic D3 Chart</h1>
+        <script type="text/javascript">
+        	var dataset = [
+	        	{
+	        		"store": "Whole Foods",
+	        		"price": ".25",
+	        		"production": "Organic"
+	        	},
+	        	{
+	        		"store": "Trader Joe's",
+	        		"price": ".32",
+	        		"production": "Conventional"
+	        	}, 
+	        	{
+	        		"store": "Fresh Grocer",
+	        		"price": ".50",
+	        		"production": "Conventional"
+	        	},     	  
+	        	{
+	        		"store": "Mariposa Coop",
+	        		"price": ".57",
+	        		"production": "Organic"
+	        	},
+	        	{
+	        		"store": "Trader Joe's",
+	        		"price": ".67",
+	        		"production": "Organic"
+	        	}     
+        	];
+			var jason = JSON.parse(dataset).data;
+			var w = 234;
+			var h = 185;     
+			var scale = d3.scale.linear()
+            	.domain([0, .67])
+            	.range([0, h]);
+	        var datasetz = [ 5, 10, 15, 20, 25 ];
+			svg = d3.select("body").append("svg")
+				.attr("width", w)
+				.attr("height", h)
+			var rectangles = svg.selectAll("rect")
+			    .data(dataset)
+			    .enter()
+			    .append("rect");
+			rectangles.attr("x", function(d, i) {
+	        	return (i * (w / dataset.length));
+	        })
+		       	.attr("y", function(d) {
+		       		return h - scale(d.price);
+		      	})
+		        .attr("width", function(d) {
+		       		return (w / dataset.length);
+		        })
+		        .attr("height", function(d) {
+		            return scale(d.price);
+		        })  
+				.style("fill", "#bebebe");
+        </script>
+    </body>
+</html>   
