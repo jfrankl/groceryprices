@@ -1,7 +1,6 @@
 from django.conf.urls import patterns, include, url
-
-# Uncomment the next two lines to enable the admin:
 from django.contrib import admin
+from prices.views import ProductListView
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -14,6 +13,7 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^$', 'prices.views.index'),  
-    url(r'^food/(?P<food_id>(.+))/$', 'prices.views.food'),
+    url(r'^food/(?P<slug>(.+))/$', 'prices.views.products_by_food'),
+    url(r'^sood/(?P<slug>(.+))/$', 'ProductListView.as_view()'),    
     url(r'^admin/', include(admin.site.urls)),
 )
