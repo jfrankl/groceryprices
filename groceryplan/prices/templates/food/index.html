@@ -1,6 +1,13 @@
-<h1>Here is all of the {{ food.name }} data</h1>
+<h1>Here is all of the {{ food }} data</h1>
 <ul>
+
 {% for Products in Product_list %}
     <li>{{ Products }}</li>
+    	<ul>
+    		<li>$ / OZ: {{ Products.ppo }}</li>
+    		<li>Source: {{ Products.store }}</li>
+    		<li>Pesticides: {{ Products.production }}</li>  
+    		<li>Price / Amount: {{ Products.ppo }}</li>      		
+    	</ul>
 {% endfor %}
 </ul>

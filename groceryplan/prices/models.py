@@ -4,6 +4,7 @@ from django import forms
 from django.forms.widgets import CheckboxSelectMultiple
 from collections import defaultdict
 from django.template.defaultfilters import slugify
+from decimal import Decimal
 
 CONVENTIONAL = 'CON'
 ORGANIC = 'ORG'
@@ -66,6 +67,7 @@ UNIT_CONVERSIONS = {
 class Store(models.Model):
     name = models.CharField(max_length=200)
     address = models.CharField(max_length=400)
+    
     def __unicode__(self):
 
         return self.name    
@@ -78,7 +80,7 @@ class Feature(models.Model):
 class Food(models.Model):
     name = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True)
-    section = models.CharField(max_length=3, choices=SECTION_CHOICES)
+    section = models.CharField(max_length=3, choices=SECTION_CHOICES)   
 
     def __unicode__(self):
 
@@ -95,14 +97,34 @@ class Product(models.Model):
                                       choices=UNIT_CHOICES)        
     production = models.CharField(max_length=3,
                                       choices=PRODUCTION_CHOICES)
+    ppo = models.DecimalField(decimal_places=4, max_digits=6, editable=False)
     extras = models.ManyToManyField(Feature, blank=True, null=True)    
 
-    def toUnit( self, intendedUnit ):
-        if intendedUnit == self.unit: return self.value
-        elif (intendedUnit, self.unit) in UNIT_CONVERSIONS:
-            return self.value * UNIT_CONVERSIONS[(self.unit, intendedUnit)]
-        else:
-            raise Exception( "Can't convert" )
+    class Meta:
+        ordering = ["-name"]    
+
+    def isOz( self, unit ):
+        if unit == "WOZ" or unit == "FOZ":
+            return True
+
+    def isVolumeorWeight( self, unit ):
+        if unit == "LIT" or unit == "FOZ":
+            return "V"
+        elif unit == "LBS" or "WOZ":
+            return "W"
+
+    def toOz( self, price, amount, unit ):
+        if self.isOz(unit): 
+            return price / amount
+        elif self.isVolumeorWeight(unit) == "V":
+            return float(price) / (float(amount) * UNIT_CONVERSIONS[(unit, FLUID_OZ)])
+        elif self.isVolumeorWeight(unit) == "W":
+            return float(price) / (float(amount) * UNIT_CONVERSIONS[(unit, WEIGHT_OZ)])
+
+    def save(self, *args, **kwargs):
+        unit = self.toOz(self.price, self.amount, self.unit)
+        self.ppo = unit
+        super(Product, self).save(*args, **kwargs)
 
     def __unicode__(self):
         return "%s %s at %s" % (PC[self.production], self.name.name, self.store.name)

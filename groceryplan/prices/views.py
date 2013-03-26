@@ -21,7 +21,7 @@ class ProductListView(ListView):
 
     def get_queryset(self):
         self.food = get_object_or_404(Food, slug=self.kwargs['slug'])
-        return Product.objects.filter(name=self.food)
+        return Product.objects.filter(name__exact=self.food)
 
     def get_context_data(self, **kwargs):
         context = super(ProductListView, self).get_context_data(**kwargs)
