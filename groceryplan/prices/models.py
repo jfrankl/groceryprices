@@ -97,11 +97,11 @@ class Product(models.Model):
                                       choices=UNIT_CHOICES)        
     production = models.CharField(max_length=3,
                                       choices=PRODUCTION_CHOICES)
-    ppo = models.DecimalField(decimal_places=4, max_digits=6, editable=False)
+    ppo = models.DecimalField(decimal_places=2, max_digits=6, editable=False)
     extras = models.ManyToManyField(Feature, blank=True, null=True)    
 
     class Meta:
-        ordering = ["-name"]    
+        ordering = ["-production", "ppo"]
 
     def isOz( self, unit ):
         if unit == "WOZ" or unit == "FOZ":
