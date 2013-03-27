@@ -1,3 +1,3 @@
 groceryprices
 =============
-Compiles, displays, and evaluates grocery store price comparisons.
+Compiles, displays, and evaluates grocery store prices.
