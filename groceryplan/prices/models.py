@@ -1,10 +1,4 @@
-import datetime
 from django.db import models
-from django import forms
-from django.forms.widgets import CheckboxSelectMultiple
-from collections import defaultdict
-from django.template.defaultfilters import slugify
-from decimal import Decimal
 
 CONVENTIONAL = 'CON'
 ORGANIC = 'ORG'
@@ -28,13 +22,13 @@ CANNED = 'CAN'
 FROZEN = 'FRO'
 PRODUCE = 'PRO'
 CLEANING = 'CLE'
-GROCERY = 'GRO'    
+GROCERY = 'GRO'
 SECTION_CHOICES = (
     (CANNED, 'Canned'),
     (FROZEN, 'Frozen'),
     (PRODUCE, 'Produce'),
     (CLEANING, 'Cleaning'),
-    (GROCERY, 'Grocery')        
+    (GROCERY, 'Grocery')
 )
 
 LOCAL = 'LOC'
@@ -43,7 +37,7 @@ NO_PRESERVATIVES = 'NOP'
 FEATURE_CHOICES = (
     (LOCAL, 'Local'),
     (FAIR_TRADE, 'Fair Trade'),
-    (NO_PRESERVATIVES, 'No Preservatives')        
+    (NO_PRESERVATIVES, 'No Preservatives')
 )
 
 FLUID_OZ = 'FOZ'
@@ -64,13 +58,14 @@ UNIT_CONVERSIONS = {
     (WEIGHT_LBS, WEIGHT_OZ): 16
 }
 
+
 class Store(models.Model):
     name = models.CharField(max_length=200)
     address = models.CharField(max_length=400)
-    
+
     def __unicode__(self):
 
-        return self.name    
+        return self.name
 
 
 class Feature(models.Model):
@@ -80,7 +75,7 @@ class Feature(models.Model):
 class Food(models.Model):
     name = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True)
-    section = models.CharField(max_length=3, choices=SECTION_CHOICES)   
+    section = models.CharField(max_length=3, choices=SECTION_CHOICES)
 
     def __unicode__(self):
 
@@ -89,42 +84,45 @@ class Food(models.Model):
 
 class Product(models.Model):
     name = models.ForeignKey(Food, to_field='slug')
-    store = models.ForeignKey(Store)        
-    date = models.DateTimeField(auto_now_add=True)    
-    price = models.DecimalField(decimal_places=2, max_digits=6)    
-    amount = models.DecimalField(decimal_places=2, max_digits=6)      
+    store = models.ForeignKey(Store)
+    date = models.DateTimeField(auto_now_add=True)
+    price = models.DecimalField(decimal_places=2, max_digits=6)
+    amount = models.DecimalField(decimal_places=2, max_digits=6)
     unit = models.CharField(max_length=3,
-                                      choices=UNIT_CHOICES)        
+                            choices=UNIT_CHOICES)
     production = models.CharField(max_length=3,
-                                      choices=PRODUCTION_CHOICES)
+                                  choices=PRODUCTION_CHOICES)
     ppo = models.DecimalField(decimal_places=2, max_digits=6, editable=False)
-    extras = models.ManyToManyField(Feature, blank=True, null=True)    
+    extras = models.ManyToManyField(Feature, blank=True, null=True)
 
     class Meta:
         ordering = ["-production", "ppo"]
 
-    def isOz( self, unit ):
+    def is_oz(self, unit):
         if unit == "WOZ" or unit == "FOZ":
             return True
 
-    def isVolumeorWeight( self, unit ):
+    def is_volume_or_weight(self, unit):
         if unit == "LIT" or unit == "FOZ":
             return "V"
         elif unit == "LBS" or "WOZ":
             return "W"
 
-    def toOz( self, price, amount, unit ):
-        if self.isOz(unit): 
+    def to_oz(self, price, amount, unit):
+        if self.is_oz(unit):
             return price / amount
-        elif self.isVolumeorWeight(unit) == "V":
-            return float(price) / (float(amount) * UNIT_CONVERSIONS[(unit, FLUID_OZ)])
-        elif self.isVolumeorWeight(unit) == "W":
-            return float(price) / (float(amount) * UNIT_CONVERSIONS[(unit, WEIGHT_OZ)])
+        elif self.is_volume_or_weight(unit) == "V":
+            return float(price) / (float(amount) *
+                                   UNIT_CONVERSIONS[(unit, FLUID_OZ)])
+        elif self.is_volume_or_weight(unit) == "W":
+            return float(price) / (float(amount) *
+                                   UNIT_CONVERSIONS[(unit, WEIGHT_OZ)])
 
     def save(self, *args, **kwargs):
-        unit = self.toOz(self.price, self.amount, self.unit)
+        unit = self.to_oz(self.price, self.amount, self.unit)
         self.ppo = unit
         super(Product, self).save(*args, **kwargs)
 
     def __unicode__(self):
-        return "%s %s at %s" % (PC[self.production], self.name.name, self.store.name)
+        return "%s %s at %s" % (PC[self.production],
+                                self.name.name, self.store.name)
