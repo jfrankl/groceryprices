@@ -1,5 +1,3 @@
-{% load prices_extras %}
-
 <h1>Here is all of the {{ food }} data</h1>
 <ul>
 
@@ -8,7 +6,7 @@
     	<ul>
     		<li>$ / OZ: {{ Products.ppo }}</li>
     		<li>Source: {{ Products.store }}</li>
-    		<li>Pesticides: {{ Products.production|production }}</li>  
+    		<li>Pesticides: {{ Products.get_production_display }}</li>  
     		<li>Price / Amount: {{ Products.ppo }}</li>      		
     	</ul>
 {% endfor %}
