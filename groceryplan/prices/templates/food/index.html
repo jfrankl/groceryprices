@@ -7,7 +7,23 @@
     		<li>$ / OZ: {{ Products.ppo }}</li>
     		<li>Source: {{ Products.store }}</li>
     		<li>Pesticides: {{ Products.get_production_display }}</li>  
-    		<li>Price / Amount: {{ Products.ppo }}</li>      		
+    		<li>Price / Amount: ${{ Products.price }} / {{ Products.amount}} {{ Products.get_unit_display }}</li>      		
     	</ul>
 {% endfor %}
+</ul>
+
+<ul>
+
+	{% if previous %}
+		<li>		
+			<a href="/food/{{ previous.slug }}/">&#8592; {{ previous.name }}</a>
+		</li>		
+	{% endif %}
+
+	{% if next %}
+		<li>		
+			<a href="/food/{{ next.slug }}/">{{ next.name }} &#8594;</a>
+		</li>		
+	{% endif %}	
+		
 </ul>

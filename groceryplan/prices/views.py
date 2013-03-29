@@ -26,4 +26,16 @@ class ProductListView(ListView):
     def get_context_data(self, **kwargs):
         context = super(ProductListView, self).get_context_data(**kwargs)
         context['food'] = self.food
+        try:
+            previous = Food.objects.filter(id__lt=self.food.id)
+            previous = previous.order_by('-id')[0:1][0]
+            context['previous'] = previous
+        except:
+            IndexError
+        try:
+            next = Food.objects.filter(id__gt=self.food.id)
+            next = next.order_by('id')[0:1][0]
+            context['next'] = next
+        except:
+            IndexError
         return context
