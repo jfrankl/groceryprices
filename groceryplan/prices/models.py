@@ -2,14 +2,14 @@ from django.db import models
 
 CONVENTIONAL = 'CON'
 ORGANIC = 'ORG'
-LOW_SPRAY = 'LOW'
-CHEMICAL_FREE = 'CMF'
+#LOW_SPRAY = 'LOW'
+#CHEMICAL_FREE = 'CMF'
 
 PRODUCTION_CHOICES = (
     (CONVENTIONAL, 'Conventional'),
-    (ORGANIC, 'Organic'),
-    (LOW_SPRAY, 'Low Spray'),
-    (CHEMICAL_FREE, 'Chemical Free')
+    (ORGANIC, 'Organic')
+    #(LOW_SPRAY, 'Low Spray'),
+    #(CHEMICAL_FREE, 'Chemical Free')
 )
 
 # Generate dictionary PC from tuple PRODUCTION_CHOICES.
@@ -71,6 +71,10 @@ class Store(models.Model):
 class Feature(models.Model):
     name = models.CharField(max_length=200)
 
+    def __unicode__(self):
+
+        return self.name
+
 
 class Food(models.Model):
     name = models.CharField(max_length=200, unique=True)
@@ -111,18 +115,16 @@ class Product(models.Model):
         elif unit == "LBS" or "WOZ":
             return "W"
 
-    def to_oz(self, price, amount, unit):
-        if self.is_oz(unit):
-            return price / amount
-        elif self.is_volume_or_weight(unit) == "V":
-            return float(price) / (float(amount) *
-                                   UNIT_CONVERSIONS[(unit, FLUID_OZ)])
-        elif self.is_volume_or_weight(unit) == "W":
-            return float(price) / (float(amount) *
-                                   UNIT_CONVERSIONS[(unit, WEIGHT_OZ)])
+    def to_oz(self):
+        if self.is_oz(self.unit):
+            return self.price / self.amount
+        elif self.is_volume_or_weight(self.unit) == "V":
+            return float(self.price) / (float(self.amount) * UNIT_CONVERSIONS[(self.unit, FLUID_OZ)])
+        elif self.is_volume_or_weight(self.unit) == "W":
+            return float(self.price) / (float(self.amount) * UNIT_CONVERSIONS[(self.unit, WEIGHT_OZ)])
 
     def save(self, *args, **kwargs):
-        unit = self.to_oz(self.price, self.amount, self.unit)
+        unit = self.to_oz()
         self.ppo = unit
         super(Product, self).save(*args, **kwargs)
 
