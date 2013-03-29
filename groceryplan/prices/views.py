@@ -27,14 +27,14 @@ class ProductListView(ListView):
         context = super(ProductListView, self).get_context_data(**kwargs)
         context['food'] = self.food
         try:
-            previous = Food.objects.filter(id__lt=self.food.id)
-            previous = previous.order_by('-id')[0:1][0]
+            previous = Food.objects.filter(name__lt=self.food.name)
+            previous = previous.order_by('-name')[0:1][0]
             context['previous'] = previous
         except:
             IndexError
         try:
-            next = Food.objects.filter(id__gt=self.food.id)
-            next = next.order_by('id')[0:1][0]
+            next = Food.objects.filter(name__gt=self.food.name)
+            next = next.order_by('name')[0:1][0]
             context['next'] = next
         except:
             IndexError
