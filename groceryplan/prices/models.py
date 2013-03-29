@@ -77,6 +77,9 @@ class Food(models.Model):
     slug = models.SlugField(max_length=200, unique=True)
     section = models.CharField(max_length=3, choices=SECTION_CHOICES)
 
+    class Meta:
+        ordering = ["name"]
+
     def __unicode__(self):
 
         return self.name
