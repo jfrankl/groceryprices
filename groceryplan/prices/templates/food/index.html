@@ -1,45 +1,88 @@
-<h1>Here is all of the {{ food }} data</h1>
-<ul>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>{{ food }}</title>
+		<script src="http://d3js.org/d3.v3.min.js"></script>
+		<style type="text/css">
+		</style>		
+    </head>
+    <body>
+     	<h1>Here is all of the {{ food }} data</h1>
+		<ul>
 
-{% for Products in Product_list %}
-    <li>{{ Products }}</li>
-    	<ul>
-    		<li>$ / OZ: {{ Products.ppo }}</li>
-    		<li>Source: {{ Products.store }}</li>
-    		<li>Pesticides: {{ Products.get_production_display }}</li>  
-    		<li>Price / Amount: ${{ Products.price }} / {{ Products.amount}} {{ Products.get_unit_display }}</li>      		
-    	</ul>
-{% endfor %}
-</ul>
+		{% for Products in Product_list %}
+		    <li>{{ Products }}</li>
+		    	<ul>
+		    		<li>$ / OZ: {{ Products.ppo }}</li>
+		    		<li>Source: {{ Products.store }}</li>
+		    		<li>Pesticides: {{ Products.get_production_display }}</li>  
+		    		<li>Price / Amount: ${{ Products.price }} / {{ Products.amount}} {{ Products.get_unit_display }}</li>      		
+		    	</ul>
+		{% endfor %}
+		</ul>
 
-<ul>
+		<ul>
 
-	{% if previous %}
-		<li>		
-			<a href="/food/{{ previous.slug }}/">&#8592; {{ previous.name }}</a>
-		</li>		
-	{% endif %}
+			{% if previous %}
+				<li>		
+					<a href="/food/{{ previous.slug }}/">&#8592; {{ previous.name }}</a>
+				</li>		
+			{% endif %}
 
-	{% if next %}
-		<li>		
-			<a href="/food/{{ next.slug }}/">{{ next.name }} &#8594;</a>
-		</li>		
-	{% endif %}	
-		
-</ul>
+			{% if next %}
+				<li>		
+					<a href="/food/{{ next.slug }}/">{{ next.name }} &#8594;</a>
+				</li>		
+			{% endif %}	
+				
+		</ul>
 
-<ul>
+		<ul>
 
-	{% if cost_of_organic %}
-		<li>		
-			Cost of Organic: {{ cost_of_organic }}
-		</li>		
-	{% endif %}
+			{% if cost_of_organic %}
+				<li>		
+					Cost of Organic: {{ cost_of_organic }}
+				</li>		
+			{% endif %}
 
-	{% if price_range %}
-		<li>		
-			Price Range: {{ price_range }}
-		</li>		
-	{% endif %}	
-		
-</ul>
+			{% if price_range %}
+				<li>		
+					Price Range: {{ price_range }}
+				</li>		
+			{% endif %}	
+				
+		</ul>
+ 		
+ 		<script type="text/javascript">
+        	var dataset = {{ d3_data|safe }}
+			var w = 234;
+			var h = 185;     
+			var scale = d3.scale.linear()
+            	.domain([0, .19])
+            	.range([0, h]);
+	        var datasetz = [ 5, 10, 15, 20, 25 ];
+			svg = d3.select("body").append("svg")
+				.attr("width", w)
+				.attr("height", h)
+			var rectangles = svg.selectAll("rect")
+			    .data(dataset)
+			    .enter()
+			    .append("rect");
+			rectangles.attr("x", function(d, i) {
+	        	return (i * (Math.round(w / dataset.length)));
+	        })
+		       	.attr("y", function(d) {
+		       		return h - scale(d.price);
+		      	})
+		        .attr("width", function(d) {
+		       		return (Math.round(w / dataset.length));
+		        })
+		        .attr("height", function(d) {
+		            return scale(d.price);
+		        })  
+				.style("fill", "#bebebe");
+        </script>
+
+    </body>
+</html>

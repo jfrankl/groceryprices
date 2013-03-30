@@ -19,12 +19,23 @@ class ProductListView(ListView):
     context_object_name = "Product_list"
     template_name = "food/index.html"
 
-    '''calculates difference between least expensive organic and least
-    expensive conventional'''
     def get_queryset(self):
         self.food = get_object_or_404(Food, slug=self.kwargs['slug'])
         return Product.objects.filter(name__exact=self.food)
 
+    def d3_data_prep(self):
+        d3 = []
+        all_products = self.get_queryset()
+        for products in all_products:
+            d3.append({
+                "store": str(products.store.name),
+                "price": float(products.ppo),
+                "production": str(products.store.name)
+            })
+        return d3
+
+    '''calculates difference between least expensive organic and least
+    expensive conventional'''
     def cost_of_organic(self):
         try:
             all_products = self.get_queryset()
@@ -62,4 +73,14 @@ class ProductListView(ListView):
             context['next'] = next
         except:
             IndexError
+        # jsony = {}
+        # quality = self.get_queryset()
+        # for stores in quality.list():
+        #     jsony['wholefoods'] = []
+        #     jsony['wholefoods'].append({
+        #         'store': stores.store,
+        #         'price': 3,
+        #         'production': 4
+        #     })
+        context['d3_data'] = self.d3_data_prep()
         return context
