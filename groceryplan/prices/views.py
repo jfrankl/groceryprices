@@ -56,6 +56,14 @@ class ProductListView(ListView):
         except:
             IndexError
 
+    def high_product(self):
+        try:
+            all_products = self.get_queryset()
+            high_product = all_products.order_by("-ppo")[0].ppo
+            return high_product
+        except:
+            IndexError
+
     def get_context_data(self, **kwargs):
         context = super(ProductListView, self).get_context_data(**kwargs)
         context['cost_of_organic'] = self.cost_of_organic()
@@ -83,4 +91,5 @@ class ProductListView(ListView):
         #         'production': 4
         #     })
         context['d3_data'] = self.d3_data_prep()
+        context['high_product'] = self.high_product
         return context
