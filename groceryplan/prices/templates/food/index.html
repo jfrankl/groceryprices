@@ -10,7 +10,6 @@
     <body>
      	<h1>Here is all of the {{ food }} data</h1>
 		<ul>
-
 		{% for Products in Product_list %}
 		    <li>{{ Products }}</li>
 		    	<ul>
@@ -21,9 +20,7 @@
 		    	</ul>
 		{% endfor %}
 		</ul>
-
 		<ul>
-
 			{% if previous %}
 				<li>		
 					<a href="/food/{{ previous.slug }}/">&#8592; {{ previous.name }}</a>
@@ -34,30 +31,25 @@
 				<li>		
 					<a href="/food/{{ next.slug }}/">{{ next.name }} &#8594;</a>
 				</li>		
-			{% endif %}	
-				
+			{% endif %}		
 		</ul>
-
 		<ul>
-
 			{% if cost_of_organic %}
 				<li>		
 					Cost of Organic: {{ cost_of_organic }}
 				</li>		
 			{% endif %}
-
 			{% if price_range %}
 				<li>		
 					Price Range: {{ price_range }}
 				</li>		
 			{% endif %}	
-				
 		</ul>
- 		
  		<script type="text/javascript">
         	var dataset = {{ d3_data|safe }}
 			var w = 234;
 			var h = 185;     
+			var barWidth = Math.round(w / dataset.length);
 			var scale = d3.scale.linear()
             	.domain([0, .19])
             	.range([0, h]);
@@ -70,19 +62,18 @@
 			    .enter()
 			    .append("rect");
 			rectangles.attr("x", function(d, i) {
-	        	return (i * (Math.round(w / dataset.length)));
+	        	return (i * (barWidth));
 	        })
 		       	.attr("y", function(d) {
 		       		return h - scale(d.price);
 		      	})
 		        .attr("width", function(d) {
-		       		return (Math.round(w / dataset.length));
+		       		return (barWidth);
 		        })
 		        .attr("height", function(d) {
 		            return scale(d.price);
 		        })  
 				.style("fill", "#bebebe");
         </script>
-
     </body>
 </html>
