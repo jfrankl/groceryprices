@@ -1,10 +1,10 @@
 from django import template
-from prices.models import PC
 
 register = template.Library()
 
 
-def production(value):
-    return PC[value]
+def remove_lead_zero(value):
+    num_as_string = str(value)
+    return num_as_string.lstrip('0')
 
-register.filter('production', production)
+register.filter('remove_lead_zero', remove_lead_zero)
