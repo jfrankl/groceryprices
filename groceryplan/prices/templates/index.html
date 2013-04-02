@@ -1,6 +1,94 @@
-<h1>What kind of food do you want?</h1>
-<ul>
-{% for products in product_type %}
-    <li><a href="/food/{{ products.name|slugify }}/">{{ products.name }}</a></li>
-{% endfor %}
-</ul>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{{ food }} | Grocery Data</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <link rel="stylesheet" media="screen" href="/static/stylesheets/style.css">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+  <script>
+  // Autocomplete for search box
+  $(function() {
+    var availableFoods = [
+		{% for products in product_type %}
+			{label: "{{ products.name }}", id: "{{ products.slug }}"},
+		{% endfor %}
+    ];
+    $( "#search-input" ).autocomplete({
+      source: availableFoods,
+      select: function(event, ui) {
+        document.location.href='/food/'+ui.item.id;
+      }         
+    });   
+	$("#search-input").keypress(function (k) { 
+	  if (k.which == 13) { 
+	    document.location.href='/food/'+$("#search-input").val();
+	    return false; 
+	  } 
+	});         
+  });
+  </script>  
+</head>
+<body>
+	<div id="header">
+		<div class="container content-inner">
+			<div class="section row">
+				<div class="twelve columns mobile-full">
+					Grocery Data
+				</div>
+			</div>
+		</div>	
+	</div>
+	<div class="container content-inner">
+		<div class="section row" style="text-align: center">		
+			<div class="two columns mobile-full">
+				&nbsp;
+			</div>			
+			<div class="eight columns mobile-full">
+				<h1>Compare grocery prices:</h1>
+			</div>	
+			<div class="two columns mobile-full">
+				&nbsp;
+			</div>	
+		</div>
+		<div class="section row">		
+			<div class="three columns mobile-full">
+				&nbsp;
+			</div>			
+			<div class="six columns mobile-full">
+				<div id="searchbox">	
+					<div id="search">
+						<div id="searchField" class="ui-widget">
+							<input type="text" id="search-input" role="search" name="s" placeholder="ex. Apple, Olive Oil, Pear" value="" autofocus="autofocus"/>
+						</div>
+					</div>
+				</div>
+			</div>	
+			<div class="three columns mobile-full">
+				&nbsp;
+			</div>	
+		</div>
+		<div class="section row">		
+			<div class="two columns mobile-full">
+				&nbsp;
+			</div>			
+			<div class="eight columns mobile-full">
+				{% for products in product_type %}
+    				<li><a href="/food/{{ products.name|slugify }}/">{{ products.name }}</a></li>
+				{% endfor %}
+			</div>	
+			<div class="two columns mobile-full">
+				&nbsp;
+			</div>	
+		</div>						
+
+	</div>
+	<!--	
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="/static/javascripts/default.js"></script> 
+	-->
+</body>
+</html>
