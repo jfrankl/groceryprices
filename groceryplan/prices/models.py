@@ -6,7 +6,7 @@ ORGANIC = 'ORG'
 #CHEMICAL_FREE = 'CMF'
 
 PRODUCTION_CHOICES = (
-    (CONVENTIONAL, 'Conventional'),
+    (CONVENTIONAL, 'Conven.'),
     (ORGANIC, 'Organic')
     #(LOW_SPRAY, 'Low Spray'),
     #(CHEMICAL_FREE, 'Chemical Free')
@@ -119,9 +119,11 @@ class Product(models.Model):
         if self.is_oz(self.unit):
             return self.price / self.amount
         elif self.is_volume_or_weight(self.unit) == "V":
-            return float(self.price) / (float(self.amount) * UNIT_CONVERSIONS[(self.unit, FLUID_OZ)])
+            return float(self.price) / (
+                float(self.amount) * UNIT_CONVERSIONS[(self.unit, FLUID_OZ)])
         elif self.is_volume_or_weight(self.unit) == "W":
-            return float(self.price) / (float(self.amount) * UNIT_CONVERSIONS[(self.unit, WEIGHT_OZ)])
+            return float(self.price) / (
+                float(self.amount) * UNIT_CONVERSIONS[(self.unit, WEIGHT_OZ)])
 
     def save(self, *args, **kwargs):
         unit = self.to_oz()
