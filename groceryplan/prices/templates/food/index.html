@@ -1,13 +1,36 @@
 {% load prices_extras %}
 
 <!doctype html>
-<html lang="en" class="no-js">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <title>{{ food }} | Grocery Data</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="http://keith-wood.name/js/jquery.svgdom.js"></script> 
+  <script>
+  // Autocomplete for search box.
+	$(function() {
+		$(".order").hover(function(){
+		    $("tr[id='" + this.id + "']").addClass('yourClass');
+		    $("rect[id='" + this.id + "']").css('fill', "#745c83");			    
+
+		}, function() {
+		    $("rect[id='" + this.id + "']").css('fill', "#bebebe");	
+		    $("tr[id='" + this.id + "']").removeClass('yourClass');				
+		});
+		$("rect").hover(function(){
+			$(this).css('fill', "#745c83");
+		    $("tr[id='" + $(this).attr('id') + "']").addClass('yourClass');
+		}, function() {
+			$(this).css('fill', "bebebe");
+		    $("tr[id='" + $(this).attr('id') + "']").removeClass('yourClass');				
+		});			
+	});
+
+    </script>        
   <link rel="stylesheet" media="screen" href="/static/stylesheets/style.css">
 </head>
 <body>
@@ -15,7 +38,7 @@
 		<div class="container content-inner">
 			<div class="section row">
 				<div class="twelve columns mobile-full">
-					Grocery Data
+					<a href="/">Grocery Data</a>
 				</div>
 			</div>
 		</div>	
@@ -27,14 +50,14 @@
 			</div>
 			<div class="six columns mobile-full">
 				<div class="section row">		
-					<div class="six columns mobile-six h6" id="nav-previous">
+					<div class="eight columns mobile-six h6" id="nav-previous">
 						{% if previous %}
 							<a href="/food/{{ previous.slug }}/">&#8592; {{ previous.name }}</a>
 						{% else %}
 						 	&nbsp;
 						{% endif %}
 					</div>
-					<div class="six columns mobile-six h6" id="nav-next">
+					<div class="four columns mobile-six h6" id="nav-next">
 						{% if next %}
 							<a href="/food/{{ next.slug }}/">{{ next.name }} &#8594;</a>
 						{% else %}
@@ -45,7 +68,7 @@
 			</div>			
 		</div>
 		<div class="section row">		
-			<div class="six columns mobile-full" id="food-table">
+			<div class="eight columns mobile-full tablet-nine" id="food-table">
 				<table>
 					<tr>						
 						<th id="ppo">$ / oz</th>
@@ -54,40 +77,44 @@
 						<th id="price_per_amount">Price / Amount</th>						
 					</tr>
 					{% for Products in Product_list %}
-						<tr>
+						<tr class="order" id="connect-{{forloop.counter}}">
 							<td class="h3">{{ Products.ppo|remove_lead_zero }}<span class="ppo"> $ / oz</span></td>
 							<td>{{ Products.store }}</td>
 							<td>{{ Products.get_production_display }}</td>
-							<td>${{ Products.price }} / {{ Products.amount|remove_lead_zero}} {{ Products.get_unit_display }}</td>	
+							<td>${{ Products.price }} / {{ Products.amount|remove_lead_zero}} {{ Products.get_unit_display }}</td>
 						</tr>
 					{% endfor %}
 				</table>
 			</div>
-			<div class="three columns mobile-full" id="graph-sidebar">
+			<div class="two columns mobile-full tablet-three" id="graph-sidebar">
 		 		<script type="text/javascript">
 		        	var dataset = {{ d3_data|safe }}
-					var w = 263;
-					var h = 185;     
+					var w = 168;
+					var h = 200;     
 					var barWidth = Math.round(w / dataset.length);
 					var scale = d3.scale.linear()
-		            	.domain([0, {{ high_product }}])
+		            	.domain([0, {% if high_product %} {{ high_product }} {% else %}0{% endif %}])
 		            	.range([0, h]);
 			        var datasetz = [ 5, 10, 15, 20, 25 ];
 					svg = d3.select("#graph-sidebar").append("svg")
 						.attr("width", "100%")
-						.attr("height", "185")
-						.attr("viewBox", "0 0 234 185")
-						.attr("preserveAspectRatio", "xMinYMin meet")						
+						.attr("height", h)
+						.attr("viewBox", "0 0 168 200")
 					var rectangles = svg.selectAll("rect")
 					    .data(dataset)
 					    .enter()
 					    .append("rect");
+					    var x = 0;
 					rectangles.attr("x", function(d, i) {
 			        	return (i * (barWidth));
 			        })
 				       	.attr("y", function(d) {
 				       		return h - scale(d.price);
 				      	})
+				      	.attr("class", "order")
+				       	.attr("id", function(d, i) {
+				       		return "connect-" + (i + 1);
+				      	})				      	
 				        .attr("width", function(d) {
 				       		return (barWidth);
 				        })
@@ -97,14 +124,14 @@
 						.style("fill", "#bebebe");
 		        </script>
 			</div>		
-			<div class="three columns mobile-full" id="number-sidebar">
+			<div class="two columns mobile-full tablet-three" id="number-sidebar">
 				
 				{% if cost_of_organic %}
 					<h5>Cost of Organic</h5>
 					<div class="h3">{{ cost_of_organic|remove_lead_zero }}x</div>
 				{% endif %}
 				{% if cost_of_organic and price_range %}
-					<hr>
+					<hr>				
 				{% endif %}
 				{% if price_range %}
 					<h5>Price Range</h5>

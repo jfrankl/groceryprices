@@ -1,17 +1,26 @@
 from prices.models import Food, Product
-from django.shortcuts import render_to_response
 from django.views.generic import ListView
 from django.shortcuts import get_object_or_404
 
 
-def index(request):
-    ptype = Food.objects.all()
+class Index(ListView):
 
-    context = {
-        'product_type': ptype
-    }
+    context_object_name = "product_type"
+    template_name = "index.html"
 
-    return render_to_response('index.html', context)
+    def get_queryset(self):
+        return Food.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(Index, self).get_context_data(**kwargs)
+        all_food = self.get_queryset()
+        context['produce'] = all_food.filter(section="PRO")
+        context['dry'] = all_food.filter(section="DRY")
+        context['miscellaneous'] = all_food.filter(section="MIS")
+        context['cans'] = all_food.filter(section="CAN")
+        context['cooking'] = all_food.filter(section="COO")
+        context['refrigerated'] = all_food.filter(section="REF")
+        return context
 
 
 class ProductListView(ListView):
@@ -43,7 +52,7 @@ class ProductListView(ListView):
             low_organic = low_organic.order_by('ppo')[0].ppo
             low_conventional = all_products.filter(production="CON")
             low_conventional = low_conventional.order_by('ppo')[0].ppo
-            return low_organic - low_conventional
+            return round(low_organic / low_conventional, 3)
         except:
             IndexError
 

@@ -19,16 +19,18 @@ for v, k in PRODUCTION_CHOICES:
     PC[v] = k
 
 CANNED = 'CAN'
-FROZEN = 'FRO'
+DRY = 'DRY'
 PRODUCE = 'PRO'
-CLEANING = 'CLE'
-GROCERY = 'GRO'
+MISC = 'MIS'
+COOKING = 'COO'
+REFRIGERATED = 'REF'
 SECTION_CHOICES = (
-    (CANNED, 'Canned'),
-    (FROZEN, 'Frozen'),
+    (CANNED, 'Cans & Jars'),
+    (DRY, 'Dry/Baking'),
     (PRODUCE, 'Produce'),
-    (CLEANING, 'Cleaning'),
-    (GROCERY, 'Grocery')
+    (MISC, 'Miscellaneous'),
+    (COOKING, 'Cooking'),
+    (REFRIGERATED, 'Refrigerated')
 )
 
 LOCAL = 'LOC'
@@ -45,9 +47,9 @@ FLUID_LITER = 'LIT'
 WEIGHT_OZ = 'WOZ'
 WEIGHT_LBS = 'LBS'
 UNIT_CHOICES = (
-    (FLUID_OZ, 'fl. oz.'),
+    (FLUID_OZ, 'fl oz'),
     (FLUID_LITER, 'lit'),
-    (WEIGHT_OZ, 'oz.'),
+    (WEIGHT_OZ, 'oz'),
     (WEIGHT_LBS, 'lbs'),
 )
 
@@ -117,13 +119,11 @@ class Product(models.Model):
 
     def to_oz(self):
         if self.is_oz(self.unit):
-            return self.price / self.amount
+            return float(self.price) / float(self.amount)
         elif self.is_volume_or_weight(self.unit) == "V":
-            return float(self.price) / (
-                float(self.amount) * UNIT_CONVERSIONS[(self.unit, FLUID_OZ)])
+            return float(self.price) / (float(self.amount) * UNIT_CONVERSIONS[(self.unit, FLUID_OZ)])
         elif self.is_volume_or_weight(self.unit) == "W":
-            return float(self.price) / (
-                float(self.amount) * UNIT_CONVERSIONS[(self.unit, WEIGHT_OZ)])
+            return float(self.price) / (float(self.amount) * UNIT_CONVERSIONS[(self.unit, WEIGHT_OZ)])
 
     def save(self, *args, **kwargs):
         unit = self.to_oz()

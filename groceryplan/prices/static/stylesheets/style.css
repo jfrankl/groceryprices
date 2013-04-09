@@ -674,6 +674,7 @@ textarea {
   }
   .mobile-six {
     width: 49.0%;
+    margin-left: 0;
   }
   .mobile-seven {
     width: 57.5%;
@@ -777,20 +778,17 @@ td, th {
   padding: 10px 8px;
 }
 
-#ppo {
-  width: 114px;
-}
-
-#pesticides {
-  width: 89px;
-}
-
-#price_per_amount {
-  width: 120px;
-}
-
 #nav-previous {
   text-align: right;
+}
+
+@media only screen and (max-width: 761px) {
+  #nav-previous {
+    text-align: left;
+  }
+  #nav-next {
+    text-align: left;
+  }  
 }
 
 #food-table .h3 {
@@ -919,6 +917,36 @@ font-weight: normal;
 ----------------------------------*/
 .ui-state-disabled {
   cursor: default !important;
+}
+
+.category-block {
+  font-size: 16px;
+  line-height: 14px;
+  padding: 2em 0 2em 0;
+}
+
+#miscellaneous {
+  background-color: #d4c0d9;
+}
+
+#cans {
+  background-color: #dac8de;
+}
+
+#cooking {
+  background-color: #e0d2e3;
+}
+
+#dry {
+  background-color: #e0d2e3;
+}
+
+#refrigerated {
+  background-color: #ede4ef;
+}
+
+#produce {
+  background-color: #f2edf4;
 }
 
 /* Search Bar
