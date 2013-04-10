@@ -76,7 +76,7 @@
 						<th id="pesticides">Pesticides</th>
 						<th id="price_per_amount">Price / Amount</th>						
 					</tr>
-					{% for Products in Product_list %}
+					{% for Products in product_list %}
 						<tr class="order" id="connect-{{forloop.counter}}">
 							<td class="h3">{{ Products.ppo|remove_lead_zero }}<span class="ppo"> $ / oz</span></td>
 							<td>{{ Products.store }}</td>
