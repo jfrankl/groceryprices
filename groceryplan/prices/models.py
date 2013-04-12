@@ -63,7 +63,14 @@ UNIT_CONVERSIONS = {
 
 class Store(models.Model):
     name = models.CharField(max_length=200)
-    address = models.CharField(max_length=400)
+    address1 = models.CharField(max_length=400)
+    address2 = models.CharField(max_length=400)
+    official_url = models.CharField(max_length=200)
+    yelp_url = models.CharField(max_length=200)
+    organic_item_count = models.PositiveSmallIntegerField(default=0)
+    conventional_item_count = models.PositiveSmallIntegerField(default=0)
+    lat = models.FloatField()
+    lon = models.FloatField()
 
     def __unicode__(self):
 
@@ -105,7 +112,7 @@ class Product(models.Model):
     extras = models.ManyToManyField(Feature, blank=True, null=True)
 
     class Meta:
-        ordering = ["-production", "ppo"]
+        ordering = ["ppo"]
 
     def is_oz(self, unit):
         if unit == "WOZ" or unit == "FOZ":

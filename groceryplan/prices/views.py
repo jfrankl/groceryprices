@@ -77,7 +77,7 @@ class ProductListView(ListView):
         try:
             previous = Food.objects.filter(name__lt=self.food.name)
             previous = previous.order_by('-name')[0]
-            context['previous'] = context
+            context['previous'] = previous
         except:
             IndexError
         try:
@@ -93,6 +93,15 @@ class ProductListView(ListView):
 
 class StoreDetailView(ListView):
 
-    context_object_name = "product_type"
+    context_object_name = "product_list"
     template_name = "store/index.html"
-    model = Store
+
+    def get_queryset(self):
+        self.store = get_object_or_404(Store, id=self.kwargs['pk'])
+        return Product.objects.filter(store=self.store)
+
+    def get_context_data(self, **kwargs):
+        context = super(StoreDetailView, self).get_context_data(**kwargs)
+        context['store'] = self.store
+
+        return context
