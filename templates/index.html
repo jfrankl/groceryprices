@@ -1,20 +1,13 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Grocery Data</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" media="screen" href="/static/stylesheets/style.css">
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+{% extends "base.html" %}
+
+{% block javascript %}
   <script>
   // Autocomplete for search box.
   $(function() {
     var availableFoods = {"items":[
-		{% for products in product_type %}
-			{"label": "{{ products.name }}", "id": "{{ products.slug }}"},
-		{% endfor %}
+    {% for products in product_type %}
+      {"label": "{{ products.name }}", "id": "{{ products.slug }}"},
+    {% endfor %}
     ]};
     $("#search-input").autocomplete({
       source: availableFoods.items,
@@ -22,31 +15,24 @@
         document.location.href='/food/'+ui.item.id;
       }         
     });   
-	var obj = availableFoods.items;
-	$("#search-input").keypress(function (k) { 
-	  if (k.which == 13) { 
-	  	// Search all foods to match search box. If found, load URL using slug.
-		$.each(availableFoods.items, function(v, f) {
-			var food = f.label.toLowerCase();
-			var truncateByOne = food.substring(0, food.length - 1);
-			if ((food == $("#search-input").val().toLowerCase()) || (truncateByOne == $("#search-input").val().toLowerCase())){
-        	document.location.href='/food/'+f.id;}
-		});
-	  } 
-	});         
+    var obj = availableFoods.items;
+    $("#search-input").keypress(function (k) { 
+      if (k.which == 13) { 
+        // Search all foods to match search box. If found, load URL using slug.
+        $.each(availableFoods.items, function(v, f) {
+          var food = f.label.toLowerCase();
+          var truncateByOne = food.substring(0, food.length - 1);
+          if ((food == $("#search-input").val().toLowerCase()) || (truncateByOne == $("#search-input").val().toLowerCase())){
+            document.location.href='/food/'+f.id;
+          }
+        });
+      } 
+    });         
   });
-  </script>  
-</head>
-<body>
-	<div id="header">
-		<div class="container content-inner">
-			<div class="section row">
-				<div class="twelve columns mobile-full">
-					Grocery Data
-				</div>
-			</div>
-		</div>	
-	</div>
+  </script>
+{% endblock %}  
+
+{% block content %}
 	<div class="container content-inner">
 		<div class="section row" style="text-align: center">		
 			<div class="two columns mobile-zero">
@@ -220,11 +206,5 @@
 				{% endfor %}				
 			</div>
 		</div>	
-	</div>			
-
-	<!--	
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-	<script src="/static/javascripts/default.js"></script> 
-	-->
-</body>
-</html>
+	</div>
+{% endblock %}

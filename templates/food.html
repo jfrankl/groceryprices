@@ -1,15 +1,13 @@
+{% extends "base.html" %}
+
 {% load prices_extras %}
 
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>{{ food }} | Grocery Data</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block title %}
+	{{ food }} | Grocery Data
+{% endblock %}
+
+{% block javascript %}
   <script src="http://d3js.org/d3.v3.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script src="http://keith-wood.name/js/jquery.svgdom.js"></script> 
   <script>
 	$(function() {
 		$(".product-item").hover(function(){
@@ -30,19 +28,11 @@
 		  $("tr[id='" + $(this).attr('id') + "']").removeClass('row-hover');				
 		});			
 	});
-    </script>        
-  <link rel="stylesheet" media="screen" href="/static/stylesheets/style.css">
-</head>
-<body>
-	<div id="header">
-		<div class="container content-inner">
-			<div class="section row">
-				<div class="twelve columns mobile-full">
-					<a href="/">Grocery Data</a>
-				</div>
-			</div>
-		</div>	
-	</div>
+    </script>   
+{% endblock %}
+
+{% block content %}
+
 	<div class="container content-inner">
 		<div class="section row">		
 			<div class="six columns mobile-full">
@@ -139,7 +129,4 @@
 			</div>				
 		</div>
 	</div>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-	<script src="/static/javascripts/default.js"></script>
-</body>
-</html>
+{% endblock %}

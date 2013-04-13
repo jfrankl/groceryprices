@@ -1,33 +1,25 @@
+{% extends "base.html" %}
+
 {% load prices_extras %}
 
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>{{ store }} | Grocery Data</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+{% block title %}
+  {{ food }} | Grocery Data
+{% endblock %}
+
+{% block javascript %}
+  <script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>    
+  <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.2.1"></script>
+{% endblock %}  
+
+{% block css %}
   <!--[if lte IE 8]>
      <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.ie.css" />
-  <![endif]-->  
-   <script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>    
-  <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.2.1"></script>
-  <script>
-  </script>        
+  <![endif]-->      
   <link rel="stylesheet" media="screen" href="/static/stylesheets/style.css">
-  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
-</head>
-<body>
-  <div id="header">
-    <div class="container content-inner">
-      <div class="section row">
-        <div class="twelve columns mobile-full">
-          <a href="/">Grocery Data</a>
-        </div>
-      </div>
-    </div>  
-  </div>
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css">
+{% endblock %}  
+
+{% block content %}
   <div class="container content-inner">
     <div class="section row">    
       <div class="six columns mobile-full">
@@ -117,5 +109,4 @@
       </div>        
     </div>
   </div>
-</body>
-</html>
+{% endblock %}
