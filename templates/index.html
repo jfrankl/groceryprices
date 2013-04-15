@@ -34,16 +34,10 @@
 
 {% block content %}
 	<div class="container content-inner">
-		<div class="section row" style="text-align: center">		
-			<div class="two columns mobile-zero">
-				&nbsp;
-			</div>			
-			<div class="eight columns mobile-full">
+		<div class="section row" style="text-align: center">				
+			<div class="twelve columns mobile-full">
 				<h1>Compare grocery prices:</h1>
-			</div>	
-			<div class="two columns mobile-zero">
-				&nbsp;
-			</div>	
+			</div>
 		</div>
 		<div class="section row">			
 			<div class="twelve columns mobile-full">
@@ -201,4 +195,57 @@
 			</div>
 		</div>	
 	</div>
+  <div id="metadata" class="category-block">  
+    <div class="container content-inner">
+      <div class="section row">
+        <div class="twelve columns">
+          <h1>Metadata / About</h1>
+          <p>Grocery Data was built by a cooperative house in Philadelphia to help us make decisions about where and how we buy groceries. We needed a tool to help us think about some complicated choices.</p>
+        </div>
+      </div>
+      <div class="section row">
+        <div class="one columns">
+          &nbsp;
+        </div>
+        <div class="four columns hypothetical-option">
+          Organic, Fair Trade Olive Oil from the Food Coop across the street?
+        </div>       
+        <div class="two columns" id="versus">
+          <em>versus</em>
+        </div>              
+        <div class="four columns hypothetical-option">
+          Bulk Olive Oil from a big box store?
+        </div>               
+        <div class="one columns">
+          &nbsp;
+        </div>        
+      </div>      
+      <hr>      
+      <div class="section row">
+        <div class="twelve columns">
+          <h3>Data Collection</h3>
+
+          <p>All data was collected in April 2013 at grocery stores in Philadelphia. We recorded the price of the least expensive conventional and organic product at each store. If there were multiple sizes of a product available, we recorded the one that cost the least per unit. Data does not reflect sales or temporary price changes.</p>
+
+          <hr>
+        </div>
+      </div>
+      <div class="section row">
+        <div class="twelve columns">
+
+          <h3>Technology Used</h3>
+
+          <p>This website is built using Python, Django, D3, and Tastypie. It is hosted on Heroku. The source code is available on <a href="https://github.com/jfrankl/groceryprices">GitHub</a>.</p>
+
+        </div>
+      </div>      
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  
 {% endblock %}
