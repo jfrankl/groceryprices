@@ -26,7 +26,7 @@ class Index(ListView):
 class ProductListView(ListView):
 
     context_object_name = "product_list"
-    template_name = "food/index.html"
+    template_name = "food.html"
 
     def get_queryset(self):
         self.food = get_object_or_404(Food, slug=self.kwargs['slug'])
@@ -94,10 +94,10 @@ class ProductListView(ListView):
 class StoreDetailView(ListView):
 
     context_object_name = "product_list"
-    template_name = "store/index.html"
+    template_name = "store.html"
 
     def get_queryset(self):
-        self.store = get_object_or_404(Store, id=self.kwargs['pk'])
+        self.store = get_object_or_404(Store, slug=self.kwargs['slug'])
         return Product.objects.filter(store=self.store)
 
     def get_context_data(self, **kwargs):

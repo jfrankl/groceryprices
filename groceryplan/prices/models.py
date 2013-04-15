@@ -63,6 +63,7 @@ UNIT_CONVERSIONS = {
 
 class Store(models.Model):
     name = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=200, unique=True)
     address1 = models.CharField(max_length=400)
     address2 = models.CharField(max_length=400)
     official_url = models.CharField(max_length=200)
@@ -103,7 +104,7 @@ class Product(models.Model):
     store = models.ForeignKey(Store)
     date = models.DateTimeField(auto_now_add=True)
     price = models.DecimalField(decimal_places=2, max_digits=6)
-    amount = models.DecimalField(decimal_places=2, max_digits=6)
+    amount = models.FloatField()
     unit = models.CharField(max_length=3,
                             choices=UNIT_CHOICES)
     production = models.CharField(max_length=3,
