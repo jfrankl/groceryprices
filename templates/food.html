@@ -9,11 +9,10 @@
 {% block javascript %}
   <script src="http://d3js.org/d3.v3.min.js"></script>
   <script>
-	$(function() {
-		$(".product-item").hover(function(){
+$(document).ready(function() {
+				$(".product-item").hover(function(){
 		    $("tr[id='" + this.id + "']").addClass('row-hover');
-		    $("rect[id='" + this.id + "']").css('fill', "#745c83");			    
-
+		    $("rect[id='" + this.id + "']").css('fill', "#745c83");
 		}, function() {
 		    $("rect[id='" + this.id + "']").css('fill', "#bebebe");	
 		    $("rect[id='" + this.id + "']").css('transition', "fill .1s linear");			    
@@ -24,7 +23,8 @@
 			$(this).css('transition', "fill .1s linear");
 			$("tr[id='" + $(this).attr('id') + "']").addClass('row-hover');
 		}, function() {
-			$(this).css('fill', "bebebe");
+	    $("rect[id='" + this.id + "']").css('fill', "#bebebe");	
+	    $("rect[id='" + this.id + "']").css('transition', "fill .1s linear");	
 		  $("tr[id='" + $(this).attr('id') + "']").removeClass('row-hover');				
 		});			
 	});
@@ -69,7 +69,7 @@
 					{% for Products in product_list %}
 						<tr class="product-item" id="connect-{{forloop.counter}}">
 							<td class="h3">{{ Products.ppo|remove_lead_zero }}<span class="ppo"> $ / oz</span></td>
-							<td>{{ Products.store }}</td>
+							<td class="store-link"><a href="/store/{{ Products.store.slug }}/">{{ Products.store }}</a></td>
 							<td>{{ Products.get_production_display }}</td>
 							<td>${{ Products.price }} / {{ Products.amount|floatformat:"0"	}} {{ Products.get_unit_display }}</td>
 						</tr>

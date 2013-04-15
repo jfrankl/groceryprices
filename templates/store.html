@@ -56,7 +56,7 @@
 					{% for Products in product_list %}
 						<tr class="food-item" id="connect-{{forloop.counter}}">
 							<td class="h3">{{ Products.ppo|remove_lead_zero }}<span class="ppo"> $ / oz</span></td>
-							<td>{{ Products.name }}</td>
+							<td class="store-link"><a href="/food/{{ Products.name.slug }}/">{{ Products.name }}</a></td>
 							<td>{{ Products.get_production_display }}</td>
 							<td>${{ Products.price }} / {{ Products.amount|floatformat:"0"}} {{ Products.get_unit_display }}</td>
 						</tr>

@@ -1,14 +1,3 @@
-/* ==========================================================================
-
-  Base Stylesheet - http://matthewhartman.github.com/base/
-  Author: Matthew Hartman - http://www.matthewhartman.com.au/
-  Version: 1.2 - Last Updated: 16th January, 2013
-
-========================================================================== */
-/* ==========================================================================
-/* --  Micro Clearfix, Resets and Common Classes
-   ========================================================================== */
-/* Micro Clearfix */
 .clear:before,
 .clear:after {
   content: "";
@@ -42,30 +31,25 @@
 .checkbox {
   zoom: 1;
 }
-/* General Resets */
-/* Start font size at 100% */
+
 html {
   font-size: 62.5%;
 }
-/* Make all form fonts consistent */
 button,
 input,
 select,
 textarea {
 }
-/* Remove default borders */
 form,
 fieldset,
 a img {
   border: 0;
 }
-/* Remove default spacing */
 form,
 fieldset {
   margin: 0;
   padding: 0;
 }
-/* Common Classes */
 .left {
   float: left;
 }
@@ -83,54 +67,10 @@ fieldset {
 .inline {
   display: inline;
 }
-.visuallyhidden {
-  border: 0;
-  clip: rect(0 0 0 0);
-  height: 1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  width: 1px;
-  left: -9999em;
-}
-.visuallyvisible {
-  clip: auto;
-  width: auto;
-  height: auto;
-  overflow: visible;
-  left: 0;
-}
 .strong {
   font-weight: bold;
 }
-.alert {
-  background-color: #ffffcc;
-  display: block;
-  padding: 4px 8px;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-}
-.nolist {
-  list-style: none;
-}
-.nopadding {
-  padding: 0;
-}
-.nomargin {
-  margin: 0;
-}
-.none,
-.nodesktop {
-  display: none;
-}
-/* ==========================================================================
-/* 1.0 - Document Setup (body, links, headings, code, tables, forms etc)
-   ========================================================================== */
-/* Body */
+
 body {
   font-family: "Proxima Nova", "Helvetica Neue", helvetica, arial, sans-serif;
   font-size: 2.1em;
@@ -143,7 +83,7 @@ body {
   -ms-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
 }
-/* Links */
+
 a {
   color: #735387;
   text-decoration: none;
@@ -153,17 +93,19 @@ a {
   -ms-transition: color .1s linear;
   transition: color .1s linear;  
 }
+
 a:visited {
   color: #735387;
 }
+
 a:hover {
   color: #2c1938;
 }
+
 a:active {
   color: #333333;
 }
-/* 1.1 Headings - h1, h2, h3, h4, h5, h6 & other (if any)
-   ========================================================================== */
+
 h1,
 h2,
 h3,
@@ -176,39 +118,45 @@ h6 {
   font-weight: bold;  
   margin-bottom: .5em;  
 }
+
 h1,
 .h1 {
   font-size: 6.8em;
   font-size: 6.8rem;  
   font-weight: normal;    
 }
+
 h2,
 .h2 {
   font-size: 5.1em;
   font-size: 5.1em;  
 }
+
 h3,
 .h3 {
   font-size: 3.8em;
   font-size: 3.8rem;
 }
+
 h4,
 .h4 {
   font-size: 2.8em;  
   font-size: 2.8rem;
 }
+
 h5,
 .h5 {
   font-size: 2.1em;  
   font-size: 2.1rem;
   font-weight: normal;
 }
+
 h6,
 .h6 {
   font-size: 1.6em;
   font-size: 1.6rem;  
 }
-/* Horizontal Rule */
+
 hr {
   border: 0;
   background: none;
@@ -217,8 +165,7 @@ hr {
   background-color: #dddddd;
   margin: 1em 0;
 }
-/* 1.3 Tables
-   ========================================================================== */
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -249,8 +196,7 @@ table caption {
   border-bottom: 0;
   font-weight: bold;
 }
-/* 1.4 Lists
-   ========================================================================== */
+
 ul,
 ul ul {
   list-style: disc;
@@ -263,88 +209,12 @@ ol ol {
   margin: 4px 0 4px 25px;
   padding: 0;
 }
-/* 1.5 Forms, Labels and Inputs
-   ========================================================================== */
 
-/* Inputs (Text, Search, Email, etc) */
-input[type=text],
-input[type=password],
-input[type=email],
-input[type=search],
-input[type=tel],
-input[type=file] {
-  outline: 0;
-  padding: 2px 5px;
-  height: 28px;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  vertical-align: middle;
-  font-size: 21px;
-  font-size: 1.3125rem;
-  font-weight: bold;
-  background-color: #ffffff;
-  color: #666666;
-  border: 1px solid #dddddd;
-  border-top: 1px solid #999999;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-}
-input[type=file] {
-  border: 0;
-  height: 20px;
-}
-input[type=button]::-moz-focus-inner,
-input[type=submit]::-moz-focus-inner,
-input[type=reset]::-moz-focus-inner {
-  padding: 0;
-  border: 0;
-}
-input[type="search"]::-webkit-search-cancel-button {
-  -webkit-appearance: none;
-}
-input[type=submit],
-input[type=button],
-input[type=reset] {
-  line-height: normal;
-  cursor: pointer;
-  -webkit-appearance: none;
-  /* Remove Default Browser Behaviour for Safari */
-
-  -moz-appearance: none;
-  /* Remove Default Browser Behaviour for Firefox */
-
-}
-
-select[multiple] {
-  min-height: 100px;
-  vertical-align: top;
-  border: 1px solid #dddddd;
-}
-select,
-input[type=text],
-input[type=password],
-input[type=email],
-input[type=search],
-input[type=tel] {
-  width: 280px;
-}
-textarea {
-  width: 260px;
-}
-
-/* ==========================================================================
-/* 2.0 - Grid Layout (Responsive)
-   ========================================================================== */
-/* Sections & Content Blocks */
 .section {
   position: relative;
 }
 .row {
-  margin-bottom: 1em;
+  margin-bottom: 1rem;
 }
 .container {
   max-width: 1120px;
@@ -412,57 +282,6 @@ textarea {
   width: 32%;
 }
 
-
-@media only screen and (min-width: 1341px) {
-  html {
-    font-size: 71%;
-  }
-  .container {
-    max-width: 1300px;  
-  }
-}
-
-
-@media only screen and (min-width: 1200px) and (max-width: 1340px) {
-  html {
-    font-size: 62.5%;
-  }
-  .container {
-    max-width: 1140px;  
-  }
-}
-
-@media only screen and (min-width: 940px) and (max-width: 1199px) {
-  html {
-    font-size: 58%;
-  }
-  .container {
-    max-width: 920px;  
-  }
-}
-
-@media only screen and (min-width: 0) and (max-width: 480px) {
-  html {
-    font-size: 58%;
-  }
-  .category-block .row {
-    margin-bottom: 0;
-  }
-  h1 {
-    font-size: 3.8em;
-    font-size: 3.8rem;
-  }
-  #nav-next {
-    text-align: left;
-  }    
-}
-
-@media only screen and (min-width: 481px) and (max-width: 761px) {
-  html {
-    font-size: 62.5%;
-  }
-}
-
 @media only screen and (min-width: 762px) and (max-width: 939px) {
   html {
     font-size: 56.5%;
@@ -478,7 +297,6 @@ textarea {
     padding-left: 10px;
     padding-right: 10px;
   }
-
   .tablet-zero {
     width: 0%;
     display: none;
@@ -874,15 +692,15 @@ font-weight: normal;
 
 #search #searchField {
   background-image:url(/static/images/mag.png);
-  background-position: 13px 13px;
+  background-position: 3% 60%;
   background-repeat:no-repeat;
   background-color:#fff;
   overflow:hidden;
-  padding: 10px 20px 4px 40px;
-  margin: 0 0 14px 0;
+  padding: .9% 4% .4% 40px;
+  margin: 0 33% 4rem 33%;
   float:left;
   border: 2px solid #c0c0c0;
-  width: 390px;
+  width: 22%;
 }
 
 #search-input {
@@ -903,11 +721,6 @@ font-weight: normal;
   font-size: 12px;
   line-height: 1.5;
 }
-/*
-.odd {
-  background-color: #f4f3f4;
-}*/
-
 
 #header a, #header a:visited {
   color: #fff;
@@ -928,6 +741,26 @@ font-weight: normal;
   transition: color .1s linear;  
 }
 
+.store-link a, .store-link a:visited {
+  color: #555;
+  text-decoration: none;
+  -webkit-transition: color .1s linear;
+  -moz-transition: color .1s linear;
+  -o-transition: color .1s linear;
+  -ms-transition: color .1s linear;
+  transition: color .1s linear;  
+}
+
+.store-link a:hover, .store-link a:active {
+  color: #2c1938;
+  text-decoration: none;
+  -webkit-transition: color .1s linear;
+  -moz-transition: color .1s linear;
+  -o-transition: color .1s linear;
+  -ms-transition: color .1s linear;
+  transition: color .1s linear;  
+}
+
 .product-item {
   background-color: #ffffff;
   transition: background-color .1s linear;
@@ -940,4 +773,59 @@ font-weight: normal;
 
 .category-block h5 {
   font-weight: bold;
+}
+
+.category-block .content-inner .row:last-child {
+  margin-bottom: 0;
+}
+
+
+@media only screen and (min-width: 1341px) {
+  html {
+    font-size: 71%;
+  }
+  .container {
+    max-width: 1300px;  
+  }
+}
+
+
+@media only screen and (min-width: 1200px) and (max-width: 1340px) {
+  html {
+    font-size: 62.5%;
+  }
+  .container {
+    max-width: 1140px;  
+  }
+}
+
+@media only screen and (min-width: 940px) and (max-width: 1199px) {
+  html {
+    font-size: 58%;
+  }
+  .container {
+    max-width: 920px;  
+  }
+}
+
+@media only screen and (min-width: 0) and (max-width: 480px) {
+  html {
+    font-size: 45%;
+  }
+  .category-block .row {
+    margin-bottom: 0;
+  }
+  h1 {
+    font-size: 3.8em;
+    font-size: 3.8rem;
+  }
+  #nav-next {
+    text-align: left;
+  }    
+}
+
+@media only screen and (min-width: 481px) and (max-width: 761px) {
+  html {
+    font-size: 62.5%;
+  }
 }
