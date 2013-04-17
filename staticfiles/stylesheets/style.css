@@ -72,7 +72,7 @@ fieldset {
 }
 
 body {
-  font-family: "Proxima Nova", "Helvetica Neue", helvetica, arial, sans-serif;
+  font-family: "proxima-nova", "Helvetica Neue", helvetica, arial, sans-serif;
   font-size: 2.1em;
   font-size: 2.1rem;  
   line-height: 1.4em;
@@ -749,7 +749,7 @@ font-weight: normal;
   color: #c0c0c0; 
   font-weight: normal;
   -webkit-font-smoothing: antialiased;
-  font-family: "Proxima Nova", "Helvetica Neue", helvetica, arial, sans-serif;
+  font-family: "proxima-nova", "Helvetica Neue", helvetica, arial, sans-serif;
 }
 
 #map-attribution {
