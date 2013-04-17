@@ -73,7 +73,7 @@ fieldset {
 
 body {
   font-family: "proxima-nova", "Helvetica Neue", helvetica, arial, sans-serif;
-  font-size: 2.1em;
+  font-size: 21px;
   font-size: 2.1rem;  
   line-height: 1.4em;
   background-color: #ffffff;
@@ -121,7 +121,7 @@ h6 {
 
 h1,
 .h1 {
-  font-size: 6.8em;
+  font-size: 68px;
   font-size: 6.8rem;  
   font-weight: normal;    
 }
@@ -134,26 +134,26 @@ h2,
 
 h3,
 .h3 {
-  font-size: 3.8em;
+  font-size: 38px;
   font-size: 3.8rem;
 }
 
 h4,
 .h4 {
-  font-size: 2.8em;  
+  font-size: 28px;  
   font-size: 2.8rem;
 }
 
 h5,
 .h5 {
-  font-size: 2.1em;  
+  font-size: 21px;  
   font-size: 2.1rem;
   font-weight: normal;
 }
 
 h6,
 .h6 {
-  font-size: 1.6em;
+  font-size: 16px;
   font-size: 1.6rem;  
 }
 
@@ -214,7 +214,7 @@ ol ol {
   position: relative;
 }
 .row {
-  margin-bottom: 1rem;
+  margin-bottom: .5em;
 }
 .container {
   max-width: 1120px;
@@ -452,7 +452,7 @@ img {
 .ppo {
   color: #aaaaaa;
   font-weight: normal;
-  font-size: 1.2em;
+  font-size: 12px;
   font-size: 1.2rem;  
   line-height: 0px;
 }
@@ -461,7 +461,7 @@ img {
   background-color: #555555; 
   margin-bottom: 4em; 
   color: #ffffff; 
-  font-size: 1.2em; 
+  font-size: 1.2px; 
   font-size: 1.2rem;
   padding-top: 1em;   
   padding-top: 1rem;     
@@ -481,7 +481,7 @@ img {
 
 th {
   color: #a39aa9;
-  font-size: 1.2em; 
+  font-size: 12px; 
   font-size: 1.2rem;  
   font-weight: bold;
   text-transform: uppercase;
@@ -653,7 +653,7 @@ font-weight: normal;
 }
 
 .category-block {
-  font-size: 1.6em;
+  font-size: 16px;
   font-size: 1.6rem;
   line-height: 2.4em;
   line-height: 2.4rem;  
@@ -661,7 +661,7 @@ font-weight: normal;
 }
 
 .store-detail, .store-detail h6 {
-  font-size: 1.6em;
+  font-size: 16px;
   font-size: 1.6rem;
   line-height: 2.4em;
   line-height: 2.4rem;
@@ -673,7 +673,7 @@ font-weight: normal;
 }
 
 #metadata p {
-  font-size: 2.8em;  
+  font-size: 28px;  
   font-size: 2.8rem;
   line-height: 1.4; 
 }
@@ -686,7 +686,7 @@ font-weight: normal;
   margin: 2em 0 2em 0;
 }
 #metadata .hypothetical-option {
-  font-size: 2.8em;
+  font-size: 28px;
   font-size: 2.8rem;
   line-height: 1.4;
 }
@@ -732,7 +732,7 @@ font-weight: normal;
   background-color:#fff;
   overflow:hidden;
   padding: .9% 4% .4% 40px;
-  margin: 0 33% 4rem 33%;
+  margin: 0 33% 2em 33%;
   float:left;
   border: 2px solid #c0c0c0;
   width: 22%;
@@ -744,7 +744,7 @@ font-weight: normal;
   outline: none;
   border: none;
   background-color: #fff;
-  font-size: 2.4em; 
+  font-size: 24px; 
   font-size: 2.4rem;   
   color: #c0c0c0; 
   font-weight: normal;
@@ -846,7 +846,7 @@ font-weight: normal;
 @media only screen and (min-width: 0) and (max-width: 480px) {
   #search #searchField {
     padding: 1% 4% .4% 30px;
-    margin: 0 10% 4rem 10%;
+    margin: 0 10% 2em 10%;
     width: 64%;
   }  
   html {
@@ -856,7 +856,7 @@ font-weight: normal;
     margin-bottom: 0;
   }
   h1 {
-    font-size: 3.8em;
+    font-size: 38px;
     font-size: 3.8rem;
   }
   #nav-next {
@@ -867,7 +867,7 @@ font-weight: normal;
 @media only screen and (min-width: 481px) and (max-width: 761px) {
   #search #searchField {
     padding: 1% 4% .4% 30px;
-    margin: 0 10% 4rem 10%;
+    margin: 0 10% 2em 10%;
     width: 64%;
   }    
   html {
