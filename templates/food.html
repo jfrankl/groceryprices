@@ -3,129 +3,129 @@
 {% load prices_extras %}
 
 {% block title %}
-	{{ food }} | Grocery Data
+  {{ food }} | Grocery Data
 {% endblock %}
 
 {% block javascript %}
   <script src="http://d3js.org/d3.v3.min.js"></script>
   <script>
-$(document).ready(function() {
-				$(".product-item").hover(function(){
-		    $("tr[id='" + this.id + "']").addClass('row-hover');
-		    $("rect[id='" + this.id + "']").css('fill', "#745c83");
-		}, function() {
-		    $("rect[id='" + this.id + "']").css('fill', "#bebebe");	
-		    $("rect[id='" + this.id + "']").css('transition', "fill .1s linear");			    
-		    $("tr[id='" + this.id + "']").removeClass('row-hover');				
-		});
-		$("rect").hover(function(){
-			$(this).css('fill', "#745c83");
-			$(this).css('transition', "fill .1s linear");
-			$("tr[id='" + $(this).attr('id') + "']").addClass('row-hover');
-		}, function() {
-	    $("rect[id='" + this.id + "']").css('fill', "#bebebe");	
-	    $("rect[id='" + this.id + "']").css('transition', "fill .1s linear");	
-		  $("tr[id='" + $(this).attr('id') + "']").removeClass('row-hover');				
-		});			
-	});
-    </script>   
+    $(document).ready(function() {
+      $(".product-item").hover(function(){
+        $("tr[id='" + this.id + "']").addClass('row-hover');
+        $("rect[id='" + this.id + "']").css('fill', "#745c83");
+      }, function() {
+        $("rect[id='" + this.id + "']").css('fill', "#bebebe");
+        $("rect[id='" + this.id + "']").css('transition', "fill .1s linear");
+        $("tr[id='" + this.id + "']").removeClass('row-hover');
+      });
+      $("rect").hover(function(){
+        $(this).css('fill', "#745c83");
+        $(this).css('transition', "fill .1s linear");
+        $("tr[id='" + $(this).attr('id') + "']").addClass('row-hover');
+      }, function() {
+        $("rect[id='" + this.id + "']").css('fill', "#bebebe");
+        $("rect[id='" + this.id + "']").css('transition', "fill .1s linear");
+        $("tr[id='" + $(this).attr('id') + "']").removeClass('row-hover');
+      });
+    });
+    </script>
 {% endblock %}
 
 {% block content %}
 
-	<div class="container content-inner">
-		<div class="section row">		
-			<div class="six columns mobile-full">
-				<h1>{{ food }}</h1>
-			</div>
-			<div class="six columns mobile-full">
-				<div class="section row">		
-					<div class="eight columns mobile-six h6" id="nav-previous">
-						{% if previous %}
-							<a href="/food/{{ previous.slug }}/">&#8592; {{ previous.name }}</a>
-						{% else %}
-						 	&nbsp;
-						{% endif %}
-					</div>
-					<div class="four columns mobile-six h6" id="nav-next">
-						{% if next %}
-							<a href="/food/{{ next.slug }}/">{{ next.name }} &#8594;</a>
-						{% else %}
-						 	&nbsp;							
-						{% endif %}
-					</div>		
-				</div>		
-			</div>			
-		</div>
-		<div class="section row">		
-			<div class="eight columns mobile-full tablet-nine" id="food-table">
-				<table>
-					<tr>						
-						<th id="ppo">$ / oz</th>
-						<th>Source</th>
-						<th id="pesticides">Pesticides</th>
-						<th id="price_per_amount">Price / Amount</th>						
-					</tr>
-					{% for Products in product_list %}
-						<tr class="product-item" id="connect-{{forloop.counter}}">
-							<td class="h3">{{ Products.ppo|remove_lead_zero }}<span class="ppo"> $ / oz</span></td>
-							<td class="store-link"><a href="/store/{{ Products.store.slug }}/">{{ Products.store }}</a></td>
-							<td>{{ Products.get_production_display }}</td>
-							<td>${{ Products.price }} / {{ Products.amount|floatformat:"0"	}} {{ Products.get_unit_display }}</td>
-						</tr>
-					{% endfor %}
-				</table>
-			</div>
-			<div class="two columns mobile-full tablet-three" id="graph-sidebar">
-		 		<script type="text/javascript">
-		        	var dataset = {{ d3_data|safe }}
-					var w = 168;
-					var h = 200;     
-					var barWidth = Math.round(w / dataset.length);
-					var scale = d3.scale.linear()
-		            	.domain([0, {% if high_product %} {{ high_product }} {% else %}0{% endif %}])
-		            	.range([0, h]);
-					svg = d3.select("#graph-sidebar").append("svg")
-						.attr("width", "100%")
-						.attr("height", h)
-						.attr("viewBox", "0 0 168 200")
-					var rectangles = svg.selectAll("rect")
-					    .data(dataset)
-					    .enter()
-					    .append("rect");
-					    var x = 0;
-					rectangles.attr("x", function(d, i) {
-			        	return (i * (barWidth));
-			        })
-				       	.attr("y", function(d) {
-				       		return h - scale(d.price);
-				      	})
-				      	.attr("class", "order")
-				       	.attr("id", function(d, i) {
-				       		return "connect-" + (i + 1);
-				      	})				      	
-				        .attr("width", function(d) {
-				       		return (barWidth);
-				        })
-				        .attr("height", function(d) {
-				            return scale(d.price);
-				        })  
-						.style("fill", "#bebebe");
-		        </script>
-			</div>		
-			<div class="two columns mobile-full tablet-three" id="number-sidebar">
-				{% if cost_of_organic %}
-					<h5>Cost of Organic</h5>
-					<div class="h3">{{ cost_of_organic|remove_lead_zero }}x</div>
-				{% endif %}
-				{% if cost_of_organic and price_range %}
-					<hr>				
-				{% endif %}
-				{% if price_range %}
-					<h5>Price Range</h5>
-					<div class="h3">{{ price_range|remove_lead_zero }}<span class="ppo"> $ / oz</span></div>
-				{% endif %}			
-			</div>				
-		</div>
-	</div>
+  <div class="container content-inner">
+    <div class="section row">
+      <div class="six columns mobile-full">
+        <h1>{{ food }}</h1>
+      </div>
+      <div class="six columns mobile-full">
+        <div class="section row">
+          <div class="eight columns mobile-six h6" id="nav-previous">
+            {% if previous %}
+              <a href="/food/{{ previous.slug }}/">&#8592; {{ previous.name }}</a>
+            {% else %}
+               &nbsp;
+            {% endif %}
+          </div>
+          <div class="four columns mobile-six h6" id="nav-next">
+            {% if next %}
+              <a href="/food/{{ next.slug }}/">{{ next.name }} &#8594;</a>
+            {% else %}
+               &nbsp;              
+            {% endif %}
+          </div>    
+        </div>    
+      </div>      
+    </div>
+    <div class="section row">    
+      <div class="eight columns mobile-full tablet-nine" id="food-table">
+        <table>
+          <tr>            
+            <th id="ppo">$ / oz</th>
+            <th>Source</th>
+            <th id="pesticides">Pesticides</th>
+            <th id="price_per_amount">Price / Amount</th>
+          </tr>
+          {% for Products in product_list %}
+            <tr class="product-item" id="connect-{{forloop.counter}}">
+              <td class="h3">{{ Products.ppo|remove_lead_zero }}<span class="ppo"> $ / oz</span></td>
+              <td class="store-link"><a href="/store/{{ Products.store.slug }}/">{{ Products.store }}</a></td>
+              <td>{{ Products.get_production_display }}</td>
+              <td>${{ Products.price }} / {{ Products.amount|floatformat:"0"  }} {{ Products.get_unit_display }}</td>
+            </tr>
+          {% endfor %}
+        </table>
+      </div>
+      <div class="two columns mobile-full tablet-three" id="graph-sidebar">
+         <script type="text/javascript">
+              var dataset = {{ d3_data|safe }}
+          var w = 168;
+          var h = 200;     
+          var barWidth = Math.round(w / dataset.length);
+          var scale = d3.scale.linear()
+                  .domain([0, {% if high_product %} {{ high_product }} {% else %}0{% endif %}])
+                  .range([0, h]);
+          svg = d3.select("#graph-sidebar").append("svg")
+            .attr("width", "100%")
+            .attr("height", h)
+            .attr("viewBox", "0 0 168 200")
+          var rectangles = svg.selectAll("rect")
+              .data(dataset)
+              .enter()
+              .append("rect");
+              var x = 0;
+          rectangles.attr("x", function(d, i) {
+                return (i * (barWidth));
+              })
+                 .attr("y", function(d) {
+                   return h - scale(d.price);
+                })
+                .attr("class", "order")
+                 .attr("id", function(d, i) {
+                   return "connect-" + (i + 1);
+                })                
+                .attr("width", function(d) {
+                   return (barWidth);
+                })
+                .attr("height", function(d) {
+                    return scale(d.price);
+                })  
+            .style("fill", "#bebebe");
+            </script>
+      </div>    
+      <div class="two columns mobile-full tablet-three" id="number-sidebar">
+        {% if cost_of_organic %}
+          <h5>Cost of Organic</h5>
+          <div class="h3">{{ cost_of_organic|remove_lead_zero }}x</div>
+        {% endif %}
+        {% if cost_of_organic and price_range %}
+          <hr>        
+        {% endif %}
+        {% if price_range %}
+          <h5>Price Range</h5>
+          <div class="h3">{{ price_range|remove_lead_zero }}<span class="ppo"> $ / oz</span></div>
+        {% endif %}      
+      </div>        
+    </div>
+  </div>
 {% endblock %}

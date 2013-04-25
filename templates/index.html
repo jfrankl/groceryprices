@@ -33,168 +33,168 @@
 {% endblock %}  
 
 {% block content %}
-	<div class="container content-inner">
-		<div class="section row" style="text-align: center">				
-			<div class="twelve columns mobile-full">
-				<h1>Compare grocery prices:</h1>
-			</div>
-		</div>
-		<div class="section row">			
-			<div class="twelve columns mobile-full">
-				<div id="searchbox">	
-					<div id="search">
-						<div id="searchField" class="ui-widget">
-							<input type="text" id="search-input" role="search" name="s" placeholder="ex. Milk" value="" autofocus="autofocus"/>
-						</div>
-					</div>
-				</div>
-			</div>	
-		</div>
-	</div>
-	<div id="produce" class="category-block">
-		<div class="container content-inner">
-			<div class="section row">
-				<div class="two columns mobile-zero tablet-zero">&nbsp;</div>
-				<div class="eight columns"><h5>Produce</h5></div>
-				<div class="two columns mobile-zero tablet-zero">&nbsp;</div>
-			</div>
-				{% for products in produce %}
-    				{% if forloop.counter == 1 %}
-    					<div class="section row"><div class="two columns mobile-zero tablet-zero">&nbsp;</div>
-    				{% endif %}
-    				<div class="two columns tablet-three mobile-twelve"><a href="/food/{{ products.name|slugify }}/">{{ products.name }}</a></div>
-    				{% if forloop.last %}
-    				<div class="two columns"></div>
-    					</div>
-    				{% elif forloop.counter|divisibleby:4 %}
-    				<div class="two columns mobile-zero tablet-zero">&nbsp;</div>
-    					</div>
-    					<div class="section row"><div class="two columns mobile-zero tablet-zero">&nbsp;</div>
-    				{% endif %}
-				{% endfor %}				
-			</div>
-		</div>	
-	</div>
-	<div id="refrigerated" class="category-block">
-		<div class="container content-inner">
-			<div class="section row">
-				<div class="two columns mobile-zero tablet-zero">&nbsp;</div>
-				<div class="eight columns"><h5>Refrigerated</h5></div>
-				<div class="two columns mobile-zero tablet-zero">&nbsp;</div>
-			</div>
-				{% for products in refrigerated %}
-    				{% if forloop.counter == 1 %}
-    					<div class="section row"><div class="two columns mobile-zero tablet-zero">&nbsp;</div>
-    				{% endif %}
-    				<div class="two columns tablet-three mobile-twelve"><a href="/food/{{ products.name|slugify }}/">{{ products.name }}</a></div>
-    				{% if forloop.last %}
-    				<div class="two columns mobile-zero tablet-zero"></div>
-    					</div>
-    				{% elif forloop.counter|divisibleby:4 %}
-    				<div class="two columns mobile-zero tablet-zero">&nbsp;</div>
-    					</div>
-    					<div class="section row"><div class="two columns mobile-zero tablet-zero">&nbsp;</div>
-    				{% endif %}
-				{% endfor %}				
-			</div>
-		</div>	
-	</div>	
-	<div id="cooking" class="category-block">
-		<div class="container content-inner">
-			<div class="section row">
-				<div class="two columns mobile-zero tablet-zero">&nbsp;</div>
-				<div class="eight columns"><h5>Cooking</h5></div>
-				<div class="two columns mobile-zero tablet-zero">&nbsp;</div>
-			</div>
-				{% for products in cooking %}
-    				{% if forloop.counter == 1 %}
-    					<div class="section row"><div class="two columns mobile-zero tablet-zero">&nbsp;</div>
-    				{% endif %}
-    				<div class="two columns tablet-three mobile-twelve"><a href="/food/{{ products.name|slugify }}/">{{ products.name }}</a></div>
-    				{% if forloop.last %}
-    				<div class="two columns"></div>
-    					</div>
-    				{% elif forloop.counter|divisibleby:4 %}
-    				<div class="two columns mobile-zero tablet-zero">&nbsp;</div>
-    					</div>
-    					<div class="section row"><div class="two columns mobile-zero tablet-zero">&nbsp;</div>
-    				{% endif %}
-				{% endfor %}				
-			</div>
-		</div>	
-	</div>	
-	<div id="dry" class="category-block">
-		<div class="container content-inner">
-			<div class="section row">
-				<div class="two columns mobile-zero tablet-zero">&nbsp;</div>
-				<div class="eight columns"><h5>Dry/Baking Goods</h5></div>
-				<div class="two columns mobile-zero tablet-zero">&nbsp;</div>
-			</div>
-				{% for products in dry %}
-    				{% if forloop.counter == 1 %}
-    					<div class="section row"><div class="two columns mobile-zero tablet-zero">&nbsp;</div>
-    				{% endif %}
-    				<div class="two columns tablet-three mobile-twelve"><a href="/food/{{ products.name|slugify }}/">{{ products.name }}</a></div>
-    				{% if forloop.last %}
-    				<div class="two columns"></div>
-    					</div>
-    				{% elif forloop.counter|divisibleby:4 %}
-    				<div class="two columns mobile-zero tablet-zero">&nbsp;</div>
-    					</div>
-    					<div class="section row"><div class="two columns mobile-zero tablet-zero">&nbsp;</div>
-    				{% endif %}
-				{% endfor %}				
-			</div>
-		</div>	
-	</div>	
-	<div id="cans" class="category-block">
-		<div class="container content-inner">
-			<div class="section row">
-				<div class="two columns mobile-zero tablet-zero">&nbsp;</div>
-				<div class="eight columns"><h5>Cans &#038; Jars</h5></div>
-				<div class="two columns mobile-zero tablet-zero">&nbsp;</div>
-			</div>
-				{% for products in cans %}
-    				{% if forloop.counter == 1 %}
-    					<div class="section row"><div class="two columns mobile-zero tablet-zero">&nbsp;</div>
-    				{% endif %}
-    				<div class="two columns tablet-three mobile-twelve"><a href="/food/{{ products.name|slugify }}/">{{ products.name }}</a></div>
-    				{% if forloop.last %}
-    				<div class="two columns"></div>
-    					</div>
-    				{% elif forloop.counter|divisibleby:4 %}
-    				<div class="two columns mobile-zero tablet-zero">&nbsp;</div>
-    					</div>
-    					<div class="section row"><div class="two columns mobile-zero tablet-zero">&nbsp;</div>
-    				{% endif %}
-				{% endfor %}				
-			</div>
-		</div>	
-	</div>	
-	<div id="miscellaneous" class="category-block">
-		<div class="container content-inner">
-			<div class="section row">
-				<div class="two columns mobile-zero tablet-zero">&nbsp;</div>
-				<div class="eight columns"><h5>Miscellaneous</h5></div>
-				<div class="two columns mobile-zero tablet-zero">&nbsp;</div>
-			</div>
-				{% for products in miscellaneous %}
-    				{% if forloop.counter == 1 %}
-    					<div class="section row"><div class="two columns mobile-zero tablet-zero">&nbsp;</div>
-    				{% endif %}
-    				<div class="two columns tablet-three mobile-twelve"><a href="/food/{{ products.name|slugify }}/">{{ products.name }}</a></div>
-    				{% if forloop.last %}
-    				<div class="two columns"></div>
-    					</div>
-    				{% elif forloop.counter|divisibleby:4 %}
-    				<div class="two columns mobile-zero tablet-zero">&nbsp;</div>
-    					</div>
-    					<div class="section row"><div class="two columns mobile-zero tablet-zero">&nbsp;</div>
-    				{% endif %}
-				{% endfor %}				
-			</div>
-		</div>	
-	</div>
+  <div class="container content-inner">
+    <div class="section row" style="text-align: center">        
+      <div class="twelve columns mobile-full">
+        <h1>Compare grocery prices:</h1>
+      </div>
+    </div>
+    <div class="section row">      
+      <div class="twelve columns mobile-full">
+        <div id="searchbox">  
+          <div id="search">
+            <div id="searchField" class="ui-widget">
+              <input type="text" id="search-input" role="search" name="s" placeholder="ex. Milk" value="" autofocus="autofocus"/>
+            </div>
+          </div>
+        </div>
+      </div>  
+    </div>
+  </div>
+  <div id="produce" class="category-block">
+    <div class="container content-inner">
+      <div class="section row">
+        <div class="two columns mobile-zero tablet-zero">&nbsp;</div>
+        <div class="eight columns"><h5>Produce</h5></div>
+        <div class="two columns mobile-zero tablet-zero">&nbsp;</div>
+      </div>
+        {% for products in produce %}
+            {% if forloop.counter == 1 %}
+              <div class="section row"><div class="two columns mobile-zero tablet-zero">&nbsp;</div>
+            {% endif %}
+            <div class="two columns tablet-three mobile-twelve"><a href="/food/{{ products.name|slugify }}/">{{ products.name }}</a></div>
+            {% if forloop.last %}
+            <div class="two columns"></div>
+              </div>
+            {% elif forloop.counter|divisibleby:4 %}
+            <div class="two columns mobile-zero tablet-zero">&nbsp;</div>
+              </div>
+              <div class="section row"><div class="two columns mobile-zero tablet-zero">&nbsp;</div>
+            {% endif %}
+        {% endfor %}        
+      </div>
+    </div>  
+  </div>
+  <div id="refrigerated" class="category-block">
+    <div class="container content-inner">
+      <div class="section row">
+        <div class="two columns mobile-zero tablet-zero">&nbsp;</div>
+        <div class="eight columns"><h5>Refrigerated</h5></div>
+        <div class="two columns mobile-zero tablet-zero">&nbsp;</div>
+      </div>
+        {% for products in refrigerated %}
+            {% if forloop.counter == 1 %}
+              <div class="section row"><div class="two columns mobile-zero tablet-zero">&nbsp;</div>
+            {% endif %}
+            <div class="two columns tablet-three mobile-twelve"><a href="/food/{{ products.name|slugify }}/">{{ products.name }}</a></div>
+            {% if forloop.last %}
+            <div class="two columns mobile-zero tablet-zero"></div>
+              </div>
+            {% elif forloop.counter|divisibleby:4 %}
+            <div class="two columns mobile-zero tablet-zero">&nbsp;</div>
+              </div>
+              <div class="section row"><div class="two columns mobile-zero tablet-zero">&nbsp;</div>
+            {% endif %}
+        {% endfor %}        
+      </div>
+    </div>  
+  </div>  
+  <div id="cooking" class="category-block">
+    <div class="container content-inner">
+      <div class="section row">
+        <div class="two columns mobile-zero tablet-zero">&nbsp;</div>
+        <div class="eight columns"><h5>Cooking</h5></div>
+        <div class="two columns mobile-zero tablet-zero">&nbsp;</div>
+      </div>
+        {% for products in cooking %}
+            {% if forloop.counter == 1 %}
+              <div class="section row"><div class="two columns mobile-zero tablet-zero">&nbsp;</div>
+            {% endif %}
+            <div class="two columns tablet-three mobile-twelve"><a href="/food/{{ products.name|slugify }}/">{{ products.name }}</a></div>
+            {% if forloop.last %}
+            <div class="two columns"></div>
+              </div>
+            {% elif forloop.counter|divisibleby:4 %}
+            <div class="two columns mobile-zero tablet-zero">&nbsp;</div>
+              </div>
+              <div class="section row"><div class="two columns mobile-zero tablet-zero">&nbsp;</div>
+            {% endif %}
+        {% endfor %}        
+      </div>
+    </div>  
+  </div>  
+  <div id="dry" class="category-block">
+    <div class="container content-inner">
+      <div class="section row">
+        <div class="two columns mobile-zero tablet-zero">&nbsp;</div>
+        <div class="eight columns"><h5>Dry/Baking Goods</h5></div>
+        <div class="two columns mobile-zero tablet-zero">&nbsp;</div>
+      </div>
+        {% for products in dry %}
+            {% if forloop.counter == 1 %}
+              <div class="section row"><div class="two columns mobile-zero tablet-zero">&nbsp;</div>
+            {% endif %}
+            <div class="two columns tablet-three mobile-twelve"><a href="/food/{{ products.name|slugify }}/">{{ products.name }}</a></div>
+            {% if forloop.last %}
+            <div class="two columns"></div>
+              </div>
+            {% elif forloop.counter|divisibleby:4 %}
+            <div class="two columns mobile-zero tablet-zero">&nbsp;</div>
+              </div>
+              <div class="section row"><div class="two columns mobile-zero tablet-zero">&nbsp;</div>
+            {% endif %}
+        {% endfor %}        
+      </div>
+    </div>  
+  </div>  
+  <div id="cans" class="category-block">
+    <div class="container content-inner">
+      <div class="section row">
+        <div class="two columns mobile-zero tablet-zero">&nbsp;</div>
+        <div class="eight columns"><h5>Cans &#038; Jars</h5></div>
+        <div class="two columns mobile-zero tablet-zero">&nbsp;</div>
+      </div>
+        {% for products in cans %}
+            {% if forloop.counter == 1 %}
+              <div class="section row"><div class="two columns mobile-zero tablet-zero">&nbsp;</div>
+            {% endif %}
+            <div class="two columns tablet-three mobile-twelve"><a href="/food/{{ products.name|slugify }}/">{{ products.name }}</a></div>
+            {% if forloop.last %}
+            <div class="two columns"></div>
+              </div>
+            {% elif forloop.counter|divisibleby:4 %}
+            <div class="two columns mobile-zero tablet-zero">&nbsp;</div>
+              </div>
+              <div class="section row"><div class="two columns mobile-zero tablet-zero">&nbsp;</div>
+            {% endif %}
+        {% endfor %}        
+      </div>
+    </div>  
+  </div>  
+  <div id="miscellaneous" class="category-block">
+    <div class="container content-inner">
+      <div class="section row">
+        <div class="two columns mobile-zero tablet-zero">&nbsp;</div>
+        <div class="eight columns"><h5>Miscellaneous</h5></div>
+        <div class="two columns mobile-zero tablet-zero">&nbsp;</div>
+      </div>
+        {% for products in miscellaneous %}
+            {% if forloop.counter == 1 %}
+              <div class="section row"><div class="two columns mobile-zero tablet-zero">&nbsp;</div>
+            {% endif %}
+            <div class="two columns tablet-three mobile-twelve"><a href="/food/{{ products.name|slugify }}/">{{ products.name }}</a></div>
+            {% if forloop.last %}
+            <div class="two columns"></div>
+              </div>
+            {% elif forloop.counter|divisibleby:4 %}
+            <div class="two columns mobile-zero tablet-zero">&nbsp;</div>
+              </div>
+              <div class="section row"><div class="two columns mobile-zero tablet-zero">&nbsp;</div>
+            {% endif %}
+        {% endfor %}        
+      </div>
+    </div>  
+  </div>
   <div id="metadata" class="category-block">  
     <div class="container content-inner">
       <div class="section row">
