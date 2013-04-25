@@ -85,7 +85,6 @@ $(document).ready(function() {
 					var scale = d3.scale.linear()
 		            	.domain([0, {% if high_product %} {{ high_product }} {% else %}0{% endif %}])
 		            	.range([0, h]);
-			        var datasetz = [ 5, 10, 15, 20, 25 ];
 					svg = d3.select("#graph-sidebar").append("svg")
 						.attr("width", "100%")
 						.attr("height", h)
