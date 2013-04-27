@@ -109,7 +109,7 @@ class Product(models.Model):
         if unit == "WOZ" or unit == "FOZ":
             return True
 
-    def is_volume_or_weight(self, unit):
+    def volume_or_weight(self, unit):
         if unit == "LIT" or unit == "FOZ":
             return "V"
         elif unit == "LBS" or "WOZ":
