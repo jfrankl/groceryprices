@@ -2,21 +2,11 @@ from django.db import models
 
 CONVENTIONAL = 'CON'
 ORGANIC = 'ORG'
-#LOW_SPRAY = 'LOW'
-#CHEMICAL_FREE = 'CMF'
 
 PRODUCTION_CHOICES = (
     (CONVENTIONAL, 'Conven.'),
     (ORGANIC, 'Organic')
-    #(LOW_SPRAY, 'Low Spray'),
-    #(CHEMICAL_FREE, 'Chemical Free')
 )
-
-# Generate dictionary PC from tuple PRODUCTION_CHOICES.
-
-PC = {}
-for v, k in PRODUCTION_CHOICES:
-    PC[v] = k
 
 CANNED = 'CAN'
 DRY = 'DRY'
@@ -139,5 +129,5 @@ class Product(models.Model):
         super(Product, self).save(*args, **kwargs)
 
     def __unicode__(self):
-        return "%s %s at %s" % (PC[self.production],
+        return "%s %s at %s" % (self.production,
                                 self.name.name, self.store.name)
